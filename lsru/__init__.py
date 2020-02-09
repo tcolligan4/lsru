@@ -10,7 +10,7 @@ from .utils import url_retrieve, url_retrieve_and_unpack
 
 __version__ = "0.6.0"
 
-class UnavailableDataProduct(Exception):
+class UnavailableDataProductException(Exception):
     pass
 
 
@@ -199,7 +199,7 @@ class _EspaBase(object):
             if messages:
                 for message_type in messages:
                     if message_type == 'errors':
-                        raise UnavailableDataProduct(messages[message_type])
+                        raise UnavailableDataProductException(messages[message_type])
                 pprint(messages)
             
         response.raise_for_status()
