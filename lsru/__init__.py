@@ -10,6 +10,9 @@ from .utils import url_retrieve, url_retrieve_and_unpack
 
 __version__ = "0.6.0"
 
+class UnavailableDataProduct(Exception):
+    pass
+
 
 class Usgs(object):
     """Interface to the Usgs API
@@ -194,7 +197,11 @@ class _EspaBase(object):
         if isinstance(data, dict):
             messages = data.pop("messages", None)
             if messages:
+                for message_type in messages:
+                    if message_type == 'errors':
+                        raise UnavailableDataProduct(messages[message_type]):
                 pprint(messages)
+            
         response.raise_for_status()
         return data
 
