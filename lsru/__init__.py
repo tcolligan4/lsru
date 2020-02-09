@@ -199,7 +199,7 @@ class _EspaBase(object):
             if messages:
                 for message_type in messages:
                     if message_type == 'errors':
-                        raise UnavailableDataProduct(messages[message_type]):
+                        raise UnavailableDataProduct(messages[message_type])
                 pprint(messages)
             
         response.raise_for_status()
