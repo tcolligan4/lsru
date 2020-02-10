@@ -168,7 +168,9 @@ def url_retrieve_and_unpack(url, path, overwrite=False):
         str: The path containing extracted content
     """
     folder = url.split('/')[-1].split('.')[0]
+    print(folder)
     path = os.path.join(path, folder)
+    print(path)
     if os.path.isdir(path) and not overwrite:
         return path
     r = requests.get(url)

@@ -467,6 +467,8 @@ class Order(_EspaBase):
                     url_retrieve_and_unpack(url, path, overwrite=overwrite)
                 else:
                     dst = os.path.join(path, filename)
+                    print(dst)
+                    raise ValueError
                     url_retrieve(url, dst, overwrite=overwrite,
                                  check_complete=check_complete)
             except Exception as e:
