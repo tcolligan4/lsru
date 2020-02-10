@@ -468,7 +468,6 @@ class Order(_EspaBase):
                 else:
                     dst = os.path.join(path, filename)
                     print(dst)
-                    raise ValueError
                     url_retrieve(url, dst, overwrite=overwrite,
                                  check_complete=check_complete)
             except Exception as e:
