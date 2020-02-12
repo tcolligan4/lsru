@@ -137,7 +137,7 @@ def url_retrieve(url, filename, overwrite=False, check_complete=True):
     """
     # Handle special cases (file already exists, no overwrite, check integrity)
     # also handle case where file has already been gunzipped 
-    if (os.path.isfile(filename) or if os.path.isfile(os.path.splitext(filename)[0])) and not overwrite:
+    if (os.path.isfile(filename) or os.path.isfile(os.path.splitext(filename)[0])) and not overwrite:
         if not check_complete:
             return filename
         r0 = requests.head(url)
