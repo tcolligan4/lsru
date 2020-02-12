@@ -136,6 +136,8 @@ def url_retrieve(url, filename, overwrite=False, check_complete=True):
         str: The filename
     """
     # Handle special cases (file already exists, no overwrite, check integrity)
+    import pdb
+    pdb.set_trace()
     if os.path.isfile(filename) and not overwrite:
         if not check_complete:
             return filename
@@ -168,9 +170,7 @@ def url_retrieve_and_unpack(url, path, overwrite=False):
         str: The path containing extracted content
     """
     folder = url.split('/')[-1].split('.')[0]
-    print(folder)
     path = os.path.join(path, folder)
-    print(path)
     if os.path.isdir(path) and not overwrite:
         return path
     r = requests.get(url)
