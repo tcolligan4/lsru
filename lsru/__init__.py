@@ -451,7 +451,7 @@ class Order(_EspaBase):
                 to ``False``, check whether local and remote files sizes match?
                 File is re-downloaded when sizes are different. Only makes sense
                 if overwrite is set to ``False``. Defaults to ``True``. Also note that
-                checking file size takes time (a few millisecons probably), so
+                checking file size takes time (a few milliseconds probably), so
                 that you'll save time setting this argument to ``False`` in case
                 you're sure previous downloads are complete
                 Note that this option does not work when ``unpack`` is set to True
@@ -460,13 +460,15 @@ class Order(_EspaBase):
             Used for its side effect of batch downloading data, no return
         """
         for url in self.urls_completed:
-            filename = url.split('/')[-1]
-            print('Downloading %s' % filename)
-            if unpack:
-                url_retrieve_and_unpack(url, path, overwrite=overwrite)
-            else:
-                dst = os.path.join(path, filename)
-                url_retrieve(url, dst, overwrite=overwrite,
-                             check_complete=check_complete)
 
-
+            try: 
+                filename = url.split('/')[-1]
+                print('Downloading %s' % filename)
+                if unpack:
+                    url_retrieve_and_unpack(url, path, overwrite=overwrite)
+                else:
+                    dst = os.path.join(path, filename)
+                    url_retrieve(url, dst, overwrite=overwrite,
+                                 check_complete=check_complete)
+            except requests.exceptions.ConnectionError as e:
+                print(e)
